@@ -1,0 +1,44 @@
+{
+  "name": "github-scrapers",
+  "version": "1.0.0",
+  "description": "Autonomous GitHub Scraper, Screenshot Extractor, Gemini Cloud AI Summarizer, and MCP Server for developer portfolios.",
+  "type": "module",
+  "main": "src/github-scraper.js",
+  "bin": {
+    "github-scrapers": "./bin/cli.js",
+    "openclaw-mcp": "./src/server.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "mcp": "node src/server.js",
+    "cli": "node bin/cli.js",
+    "scrape": "node src/github-scraper.js",
+    "sync": "node src/sync-runner.js",
+    "sync:force": "node src/sync-runner.js --force",
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "github-scraper",
+    "mcp",
+    "model-context-protocol",
+    "openclaw",
+    "portfolio-sync",
+    "gemini-ai",
+    "screenshot-extractor",
+    "automation",
+    "neo-brutalist"
+  ],
+  "author": "NeoShaurya <me@neoshaurya.com> (https://neoshaurya.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeoShaurya/Github_Scrapers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NeoShaurya/Github_Scrapers/issues"
+  },
+  "homepage": "https://github.com/NeoShaurya/Github_Scrapers#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
