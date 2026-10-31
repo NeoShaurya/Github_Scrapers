@@ -106,14 +106,16 @@ async function main() {
         const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : 30
 
         console.log(`${c.dim}[cli] Fetching repositories for @${username} (limit: ${limit})...${c.reset}`)
-        const repos = await scrapeGitHubRepos({ username, limit })
+        const data = await scrapeGitHubRepos({ username, limit })
+        const repos = Array.isArray(data) ? data : (data?.repos || [])
         console.log(`\n${c.bold}Found ${c.yellow}${repos.length}${c.reset}${c.bold} repositories for @${username}:${c.reset}\n`)
         repos.forEach((r, idx) => {
-          const stars = r.stargazers_count > 0 ? ` [★ ${r.stargazers_count}]` : ''
+          const stars = (r.stars || r.stargazers_count) > 0 ? ` [★ ${r.stars || r.stargazers_count}]` : ''
           const lang = r.language ? ` (${r.language})` : ''
+          const url = r.repoUrl || r.html_url || ''
           console.log(`  ${c.bold}${String(idx + 1).padStart(2, ' ')}.${c.reset} ${c.pink}${r.name}${c.reset}${lang}${c.yellow}${stars}${c.reset}`)
           if (r.description) console.log(`      ${c.dim}${r.description}${c.reset}`)
-          console.log(`      ${c.gray}${r.html_url}${c.reset}`)
+          if (url) console.log(`      ${c.gray}${url}${c.reset}`)
         })
         console.log('')
         break
