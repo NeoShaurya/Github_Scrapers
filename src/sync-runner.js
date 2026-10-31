@@ -71,8 +71,8 @@ export async function runSync(options = {}) {
   const username = options.username || process.env.GITHUB_USERNAME || 'NeoShaurya'
   const outputFile = options.outputFile || DEFAULT_OUT_FILE
   const publicDir = options.publicDir || path.resolve(path.dirname(outputFile), '../public/projects')
-  const autoPush = Boolean(options.autoPush)
-  const forceUpdate = Boolean(options.forceUpdate)
+  const autoPush = Boolean(options.autoPush || options.gitPush)
+  const forceUpdate = Boolean(options.forceUpdate || options.force)
   const token = options.token || process.env.GITHUB_TOKEN
 
   const startTime = new Date()
@@ -282,9 +282,13 @@ export async function runSync(options = {}) {
     durationMs,
     totalProjects: existingProjects.length,
     scrapedRepos: scraped.repos.length,
+    total: existingProjects.length,
+    added: addedProjects.length,
+    updated: updatedProjects.length,
     addedProjects,
     updatedProjects,
     hasChanges,
+    outFile: outputFile,
   }
 }
 
